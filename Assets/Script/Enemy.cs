@@ -2,9 +2,12 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public int health = 3;
-    public float moveSpeed = 2f;
-    public Sprite deadSprite;
+    [Header("References")]
+    [SerializeField] private Sprite deadSprite;
+    [Header("Properties")]
+    [SerializeField] private int health = 3;
+    [SerializeField] private int damage = 1;
+    [SerializeField] private float moveSpeed = 2f;
 
     private SpriteRenderer spriteRenderer;
     private bool isDead = false;
@@ -28,6 +31,11 @@ public class Enemy : MonoBehaviour
                 Die();
             }
         }
+    }
+
+    public int GetDamageAmount()
+    {
+        return damage;
     }
 
     void Die()

@@ -6,15 +6,29 @@ public class GameManager : MonoBehaviour
     [SerializeField] private UIManager uIManager;
 
     [Header("GameSettings")]
-    [SerializeField] private float maxHealth = 100f;
+    public float maxHealth {get; private set;} = 100f;
+    private float currentHealth;
+    private bool gameOver;
 
-    public float MaxHealth()
+    public bool GameOver => gameOver;
+
+    void Start()
     {
-        return maxHealth;
+        currentHealth = maxHealth;
     }
 
-    public void GetDamage(float amount)
+    void Update()
     {
-        maxHealth -= amount;
+        
+    }
+
+    public float CurrentHealth()
+    {
+        return currentHealth;
+    }
+
+    public void HealthDecrease(float amount)
+    {
+        currentHealth -= amount;
     }
 }

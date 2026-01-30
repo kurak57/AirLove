@@ -14,6 +14,7 @@ TagManager:
   - Projectile
   - BottomCloud
   - TopCloud
+  - Enemy
   layers:
   - Default
   - TransparentFX

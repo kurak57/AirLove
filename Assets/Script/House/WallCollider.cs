@@ -2,14 +2,15 @@ using UnityEngine;
 
 public class WallCollider : MonoBehaviour
 {
-    private HouseProperties houseController;
+    private HouseProperties houseProperties;
 
+    const string enemyTag = "Enemy";
     void Start()
     {
-        houseController = GetComponentInParent<HouseProperties>();
-        if (houseController == null)
+        houseProperties = GetComponentInParent<HouseProperties>();
+        if (houseProperties == null)
         {
-            Debug.LogError("WallCollider tidak dapat menemukan HouseProperties di induknya!");
+            Debug.LogError("WallCollider tidak dapat menemukan HouseProperties!");
         }
     }
 
@@ -17,7 +18,20 @@ public class WallCollider : MonoBehaviour
     {
         if (other.CompareTag("TopCloud") || other.CompareTag("BottomCloud"))
         {
-            houseController.HandleWallCollision(other.tag);
+            houseProperties.HandleCloudCollision(other.tag);
         }
+
+        Debug.Log(other.name);
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag(enemyTag))
+        {
+            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+            int enemyDamage = enemy.GetDamageAmount();
+            houseProperties.DamageToHouse(enemyDamage);
+        }
+
     }
 }

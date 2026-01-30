@@ -14,6 +14,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image progressImage;
     [SerializeField] private Transform house,startpoint ,finishPoint;
 
+    [Header("Game Over")]
+    [SerializeField] private GameObject gameOverPanel;
     private float initialDistance;
 
     void Start()
@@ -28,14 +30,17 @@ public class UIManager : MonoBehaviour
         UpdateHealthBar();
     }
 
-    public void ChangeHealthText(int healthAmount)
+    public void ChangeHealthText(float healthAmount)
     {
         healthText.text = healthAmount.ToString();
     }
 
     private void UpdateHealthBar()
     {
-        healthBarImage.fillAmount = gameManager.MaxHealth();
+        float maxHealth = gameManager.maxHealth;
+        float currentHealth = gameManager.CurrentHealth();
+        healthBarImage.fillAmount = currentHealth/maxHealth;
+        ChangeHealthText(currentHealth);
     }
 
     private void UpdateProgressionBar()

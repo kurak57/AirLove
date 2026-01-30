@@ -2,14 +2,20 @@ using UnityEngine;
 
 public class HouseProperties : MonoBehaviour
 {
-    // public int health = 100;
+    [SerializeField] private GameManager gameManager;
     public float moveSpeed = 2f;
 
     [Header("Bump Settings")]
-    public float bumpDistanceX = 0.5f; 
-    public float bumpDistanceY = 0.2f;
+    [SerializeField] private float bumpDistanceX = 0.5f; 
+    [SerializeField] private float bumpDistanceY = 0.2f;
+    [SerializeField] private int bumpDamage = 1;
 
-    public void HandleWallCollision(string cloudTag)
+
+    private void Start() {
+        gameManager = FindFirstObjectByType<GameManager>();
+    }
+
+    public void HandleCloudCollision(string cloudTag)
     {
         if (cloudTag == "TopCloud")
         {
@@ -19,8 +25,13 @@ public class HouseProperties : MonoBehaviour
         {
             transform.Translate(new Vector2(-bumpDistanceX, bumpDistanceY));
         }
+        DamageToHouse(bumpDamage);
     }
 
+    public void DamageToHouse(int damage)
+    {
+        gameManager.HealthDecrease(damage);
+    }
     private void Update()
     {
         transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
