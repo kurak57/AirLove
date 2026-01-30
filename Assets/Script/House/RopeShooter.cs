@@ -11,14 +11,12 @@ public class RopeShooter : MonoBehaviour
     [Header("Input Action")]
     private InputActionReference activeFireAction;
 
-    [Header("Pengaturan Tali")]
+    [Header("Rope Setting")]
     public float ropeLength = 10f;
     public float extendSpeed = 20f;
     public float pullSpeed = 5f;
 
-    [Header("Pengaturan Fisika")]
     public LayerMask grabbableLayer;
-    [Tooltip("Geser titik kaitan (hook) relatif terhadap pusat objek yang ditarik.")]
     public Vector2 hookOffset;
 
     private Coroutine activeCoroutine;
@@ -59,9 +57,6 @@ public class RopeShooter : MonoBehaviour
             lineRenderer.SetPosition(1, Vector3.zero);
             lineRenderer.enabled = false;
         }
-
-        // Baris yang menonaktifkan hook di awal telah dihapus.
-        // Pastikan hookSpriteTransform aktif di scene sebelum menekan Play.
     }
 
     void Update()
@@ -117,7 +112,6 @@ public class RopeShooter : MonoBehaviour
     private IEnumerator ExtendLine()
     {
         lineRenderer.enabled = true;
-        // Baris yang mengaktifkan hook di sini telah dihapus.
 
         float targetX = ropeLength * directionMultiplier;
         float currentX = lineRenderer.GetPosition(1).x;
@@ -174,15 +168,12 @@ public class RopeShooter : MonoBehaviour
         yield return null;
     }
     
-    // Cleanup akhir
     endPoint = Vector3.zero;
     lineRenderer.SetPosition(1, endPoint);
     lineRenderer.enabled = false;
     
     if (hookSpriteTransform != null)
     {
-        // --- INI BARIS YANG DIPERBAIKI ---
-        // Atur posisi dunia hook agar sama dengan posisi dunia titik awal tali.
         hookSpriteTransform.position = lineRenderer.transform.position;
     }
 }

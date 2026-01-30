@@ -4,13 +4,12 @@ using System.Collections;
 
 public class PlayerMovement : MonoBehaviour
 {
-    // ... (Variabel dan fungsi Awake, OnEnable, OnDisable, Update tidak berubah) ...
+
     [Header("Movement Settings")]
     [SerializeField] float speed = 10f;
     [SerializeField] float climbSpeed = 5f;
 
     [Header("Climbing Settings")]
-    [Tooltip("Seberapa dekat pemain harus berada dari pusat tangga untuk bisa turun.")]
     [SerializeField] float horizontalClimbThreshold = 0.2f;
     [SerializeField] private Animator _animator;
 
@@ -64,35 +63,25 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    // --- PERUBAHAN UTAMA DI SINI ---
     private void FixedUpdate()
     {
-        // Cek kondisi untuk memanjat
         if (isTouchingStair && Mathf.Abs(move.y) > 0.1f)
         {
-            // Panggil fungsi memanjat
             Debug.Log($"Cek move.y: {Mathf.Abs(move.y)}");
             Climb();
-            // Atur animasi memanjat di sini
             _animator.SetBool("isClimb", true); 
         }
         else
         {
-            // Jika tidak memanjat, bergerak horizontal
             MoveHorizontally();
-            // Pastikan animasi memanjat dimatikan di sini
             _animator.SetBool("isClimb", false);
         }
     }
 
-    // --- PERUBAHAN DI SINI ---
     private void Climb()
     {
         rb.gravityScale = 0f;
-        // P.S. ada typo di kode Anda (linearVelocityX), seharusnya linearVelocity.x atau velocity.x
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, move.y * climbSpeed);
-        
-        // Logika animator dipindahkan ke FixedUpdate, jadi hapus dari sini.
     }
 
     private void MoveHorizontally()
@@ -100,7 +89,6 @@ public class PlayerMovement : MonoBehaviour
         rb.gravityScale = originalGravityScale;
         rb.linearVelocity = new Vector2(move.x * speed, rb.linearVelocity.y);
 
-        // Atur animasi berjalan
         if (move.x != 0)
         {
             _animator.SetBool("isWalking", true);
@@ -113,7 +101,6 @@ public class PlayerMovement : MonoBehaviour
         FlipSprite();
     }
     
-    // ... (Sisa skrip: FlipSprite, OnTrigger, DisableCollision tidak berubah) ...
     private void FlipSprite()
     {
         if (move.x < -0.01f)

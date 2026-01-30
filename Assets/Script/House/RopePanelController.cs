@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class RopePanelController : MonoBehaviour
 {
-    [Header("Target yang Dikontrol")]
-    [Tooltip("Seret ke sini script PlayerShooting dari Shooter yang sesuai.")]
+    [Header("Target")]
+    [Tooltip("Drag PlayerShooting script from specific shooter.")]
     public RopeShooter targetRopeShooterScript;
 
-    [Tooltip("Seret ke sini script ShooterRotation dari Shooter yang sesuai.")]
+    [Tooltip("Drag Shooter Rotation script from specific shooter.")]
     public RopeShooterRotation targetRopeShooterRotationScript;
 }

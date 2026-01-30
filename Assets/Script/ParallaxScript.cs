@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class ParallaxScript: MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     Transform cam;
     Vector3 camStartPos;
     float distance;

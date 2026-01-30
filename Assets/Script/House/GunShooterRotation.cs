@@ -4,19 +4,11 @@ using UnityEngine.InputSystem;
 
 public class GunShooterRotation : MonoBehaviour
 {
-    [Header("Pengaturan Rotasi")]
-    [Tooltip("Kecepatan rotasi dalam derajat per detik.")]
+    [Header("Rotation Setting")]
     public float rotationSpeed = 90f;
+    [SerializeField] private float minRotationAngle = -60f;
+    [SerializeField] private float maxRotationAngle = 60f;
 
-    [Header("Batasan Rotasi (Derajat)")]
-    [SerializeField]
-    [Tooltip("Batas rotasi minimum dalam derajat. Contoh: -60")]
-    private float minRotationAngle = -60f;
-    [SerializeField]
-    [Tooltip("Batas rotasi maksimum dalam derajat. Contoh: 60")]
-    private float maxRotationAngle = 60f;
-
-    // Variabel untuk menyimpan referensi input dan status rotasi
     private InputActionReference activeMoveAction;
     private float rotationInput = 0f;
     private float rotationMultiplier = 1f;
@@ -26,12 +18,10 @@ public class GunShooterRotation : MonoBehaviour
     {
         if (transform.parent != null && transform.parent.name == "BottomShooter")
         {
-            Debug.Log("Parent adalah BottomShooter, rotasi akan dibalik.");
             rotationMultiplier = -1f;
         }
     }
 
-    // Metode publik untuk mengatur action mana yang harus digunakan
     public void SetMoveAction(InputActionReference moveAction)
     {
         this.activeMoveAction = moveAction;

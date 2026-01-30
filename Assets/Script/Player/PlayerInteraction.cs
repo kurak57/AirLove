@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    // Referensi ke handler input milik pemain ini
+    [Header("Controller References")]
     private PlayerInputHandler playerInputHandler;
 
     private GunShooter activeGunShooterScript;
@@ -12,7 +12,6 @@ public class PlayerInteraction : MonoBehaviour
     private RopeShooter activeRopeShooterScript;
     private RopeShooterRotation activeRopeShooterRotation;
 
-    // Dapatkan referensi ke PlayerInputHandler saat mulai
     private void Awake()
     {
         playerInputHandler = GetComponent<PlayerInputHandler>();
@@ -24,16 +23,14 @@ public class PlayerInteraction : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // --- Interaksi dengan Gun Panel ---
         GunPanelController gunPanel = other.GetComponent<GunPanelController>();
         if (gunPanel != null)
         {
-            Debug.Log($"Masuk ke panel {other.name}! Menyiapkan shooter untuk pemain ini.");
+            Debug.Log($"Masuk ke panel {other.name}!");
 
             activeGunShooterScript = gunPanel.targetGunShooterScript;
             activeGunShooterRotationScript = gunPanel.targetGunRotationScript;
 
-            // Berikan input action dari pemain ini ke skrip senjata SEBELUM mengaktifkannya
             if (activeGunShooterScript != null)
             {
                 activeGunShooterScript.SetFireAction(playerInputHandler.fireAction);
@@ -46,7 +43,6 @@ public class PlayerInteraction : MonoBehaviour
             }
         }
         
-        // (Logika untuk HousePanelController dan RopePanelController tetap sama)
         HousePanelController housePanel = other.GetComponent<HousePanelController>();
         if (housePanel != null)
         {
@@ -82,7 +78,6 @@ public class PlayerInteraction : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        // --- Meninggalkan Gun Panel ---
         GunPanelController gunPanel = other.GetComponent<GunPanelController>();
         if (gunPanel != null && gunPanel.targetGunShooterScript == activeGunShooterScript)
         {
@@ -95,7 +90,6 @@ public class PlayerInteraction : MonoBehaviour
             activeGunShooterRotationScript = null;
         }
         
-        // (Logika untuk HousePanelController dan RopePanelController tetap sama)
         HousePanelController housePanel = other.GetComponent<HousePanelController>();
         if (housePanel != null && housePanel.targetHouseMoverScript == activeHouseMoverScript)
         {

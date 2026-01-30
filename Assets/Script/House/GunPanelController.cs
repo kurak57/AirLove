@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class GunPanelController : MonoBehaviour
 {
-    [Header("Target yang Dikontrol")]
-    [Tooltip("Seret ke sini script PlayerShooting dari Shooter yang sesuai.")]
+    [Header("Shooter Target")]
+    [Tooltip("Drag PlayerShooting script from specific shooter.")]
     public GunShooter targetGunShooterScript;
 
-    [Tooltip("Seret ke sini script ShooterRotation dari Shooter yang sesuai.")]
+    [Tooltip("Drag ShooterRotation script from specific shooter.")]
     public GunShooterRotation targetGunRotationScript;
 }
