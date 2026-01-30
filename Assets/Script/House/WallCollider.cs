@@ -20,8 +20,6 @@ public class WallCollider : MonoBehaviour
         {
             houseProperties.HandleCloudCollision(other.tag);
         }
-
-        Debug.Log(other.name);
     }
 
     void OnCollisionEnter2D(Collision2D collision)

@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public class RopeShooter : MonoBehaviour
 {
-    [Header("Referensi Komponen")]
+    [Header("Reference")]
     public LineRenderer lineRenderer;
     public Transform hookSpriteTransform;
 
@@ -24,6 +24,8 @@ public class RopeShooter : MonoBehaviour
     
     private GameObject hookedObject = null;
     private bool isHooked = false;
+
+    LevelManager levelManager;
 
     public void SetFireAction(InputActionReference fireAction)
     {
@@ -45,6 +47,7 @@ public class RopeShooter : MonoBehaviour
 
     void Start()
     {
+        levelManager = FindFirstObjectByType<LevelManager>();
         if (transform.parent != null && transform.parent.name == "Top")
         {
             directionMultiplier = -1f;
@@ -76,6 +79,7 @@ public class RopeShooter : MonoBehaviour
 
             if (Vector2.Distance(hookedObject.transform.position, transform.position) < 0.1f)
             {
+                levelManager.ChecklistObjectHooked(hookedObject);
                 Destroy(hookedObject);
                 ReleaseHookedObject();
             }

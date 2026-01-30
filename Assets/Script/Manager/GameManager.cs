@@ -4,6 +4,7 @@ public class GameManager : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private UIManager uIManager;
+    [SerializeField] private ScreenFlash screenFlash;
 
     [Header("GameSettings")]
     public float maxHealth {get; private set;} = 100f;
@@ -17,11 +18,6 @@ public class GameManager : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    void Update()
-    {
-        
-    }
-
     public float CurrentHealth()
     {
         return currentHealth;
@@ -29,6 +25,7 @@ public class GameManager : MonoBehaviour
 
     public void HealthDecrease(float amount)
     {
+        screenFlash.FlashRed();
         currentHealth -= amount;
     }
 }
